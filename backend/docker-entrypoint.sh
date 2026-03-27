@@ -26,9 +26,9 @@ if grep -qE "^APP_KEY=(base64:YOUR_APP_KEY_HERE)?$" .env; then
 fi
 
 # ── 2. Clear stale caches then rebuild ──────────────────────────────────
+# Note: route:cache is intentionally omitted — closure-based routes cannot be cached
 php artisan optimize:clear
 php artisan config:cache
-php artisan route:cache
 
 # ── 3. Migrate & seed ────────────────────────────────────────────────────
 echo "Running migrations..."
