@@ -1,6 +1,9 @@
 #!/bin/sh
 
-# បង្កើតតែ Config Cache បានហើយ
+# ជម្រះ Cache ចាស់ទាំងអស់ (config, route, view, application)
+php artisan optimize:clear
+
+# បង្កើត Config Cache ថ្មី
 php artisan config:cache
 
 # រត់ Migration — drop & recreate all tables then seed (--force for production)
