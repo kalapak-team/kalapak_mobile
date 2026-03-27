@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     // Disable transaction wrapping — required for Neon/PgBouncer connection pooling
-    // (pooled connections abort subsequent statements after any DDL error in a transaction)
-    public bool $withinTransaction = false;
+    public $withinTransaction = false;
 
     public function up(): void
     {

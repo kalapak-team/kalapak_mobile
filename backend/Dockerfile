@@ -41,7 +41,8 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 # កូពី និងផ្ដល់សិទ្ធិឱ្យ Entrypoint Script
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN sed -i 's/\r//g' /usr/local/bin/docker-entrypoint.sh \
+    && chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Render ជាទូទៅប្រើ Port 8000 ឬ 10000 (យើងប្រើ 8000 តាមអ្នក)
 EXPOSE 8000
