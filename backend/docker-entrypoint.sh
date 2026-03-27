@@ -12,7 +12,7 @@ fi
 [ -n "$APP_KEY" ]      && sed -i "s|^APP_KEY=.*|APP_KEY=$APP_KEY|" .env
 [ -n "$APP_URL" ]      && sed -i "s|^APP_URL=.*|APP_URL=$APP_URL|" .env
 [ -n "$APP_DEBUG" ]    && sed -i "s|^APP_DEBUG=.*|APP_DEBUG=$APP_DEBUG|" .env
-[ -n "$DATABASE_URL" ] && echo "DATABASE_URL=$DATABASE_URL" >> .env
+[ -n "$DATABASE_URL" ] && { grep -q "^DATABASE_URL=" .env && sed -i "s|^DATABASE_URL=.*|DATABASE_URL=$DATABASE_URL|" .env || echo "DATABASE_URL=$DATABASE_URL" >> .env; }
 [ -n "$DB_HOST" ]      && sed -i "s|^DB_HOST=.*|DB_HOST=$DB_HOST|" .env
 [ -n "$DB_PORT" ]      && sed -i "s|^DB_PORT=.*|DB_PORT=$DB_PORT|" .env
 [ -n "$DB_DATABASE" ]  && sed -i "s|^DB_DATABASE=.*|DB_DATABASE=$DB_DATABASE|" .env

@@ -5,8 +5,17 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
+    // Disable transaction wrapping — required for Neon/PgBouncer connection pooling
+    // (pooled connections abort subsequent statements after any DDL error in a transaction)
+    public bool $withinTransaction = false;
+
     public function up(): void
     {
+        // Drop first so migrate:fresh works even if Neon didn't clean up properly
+        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('users');
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
